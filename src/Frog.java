@@ -12,7 +12,7 @@ public class Frog extends Definitions {
         super(500 , 500 , 800, 600 );
         this.alive = true;
         this.frog = new ImageIcon("FrogUp.png");
-        this.image = new Definitions(Main.WINDOW_WIDTH  / 2 , Main.WINDOW_HEIGHT - 10  , 40 , 40 );
+        this.image = new Definitions(Final.WINDOW_WIDTH  / 2 , Final.WINDOW_HEIGHT - 10  , 40 , 40 );
     }
     public void paint (Graphics graphics){
         if (this.alive) {
