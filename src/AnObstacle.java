@@ -25,6 +25,5 @@ public class AnObstacle extends JPanel {
         this.truckRight.paintIcon(this, graphics, 0, 0);
         this.flower.paintIcon(this, graphics, 0, 0);
 
-
     }
 }
