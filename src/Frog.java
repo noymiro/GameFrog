@@ -9,10 +9,15 @@ public class Frog extends Definitions {
 
 
     public Frog(){
-        super(500 , 500 , 800, 600 );
+        super(Final.WINDOW_HEIGHT - 75  , Final.WINDOW_WIDTH / 2  , 40, 40 );
         this.alive = true;
         this.frog = new ImageIcon("FrogUp.png");
-        this.image = new Definitions(Final.WINDOW_WIDTH  / 2 , Final.WINDOW_HEIGHT - 10  , 40 , 40 );
+        //this.image = new Definitions(Final.WINDOW_WIDTH  / 2 , Final.WINDOW_HEIGHT - 10  , 40 , 40 );
+    }
+
+    protected void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        this.frog.paintIcon(this , graphics , Final.WINDOW_HEIGHT -75 ,Final.WINDOW_WIDTH / 2 );
     }
     public void paint (Graphics graphics){
         if (this.alive) {
@@ -20,26 +25,22 @@ public class Frog extends Definitions {
         }
     }
     public void moveRight () {
-    //    this.frog.setImage(frog);
-        this.moveRight();
+
+       this.image.moveRight();
 
     }
 
     public void moveLeft () {
-     //   this.head.moveLeft();
-        this.moveLeft();
+        this.image.moveLeft();
 
     }
 
     public void moveUp () {
-    //    this.head.moveUp();
-        this.moveUp();
-
+        this.image.moveUp();
     }
 
     public void moveDown () {
-  //      this.head.moveDown();
-        this.moveDown();
+        this.image.moveDown();
 
     }
     public boolean checkCollision (Definitions obstacle){

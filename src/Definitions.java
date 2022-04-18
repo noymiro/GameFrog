@@ -1,6 +1,7 @@
+import javax.swing.*;
 import java.awt.*;
 
-public class Definitions {
+public class Definitions extends JPanel {
     private int x ;
     private int y ;
     private int width ;
