@@ -11,7 +11,7 @@ public class InformationScene extends JPanel {
     public InformationScene(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
         this.Information = new ImageIcon("g");
-     //   this.setBackground(Color.GREEN);
+       this.setBackground(Color.GREEN);
         this.setVisible(true);
 
     }

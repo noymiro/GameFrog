@@ -7,9 +7,6 @@ public class Main extends  JFrame {
         new Main();
 
 
-
-
-
     }
     public Main(){
         OpenScene openScene = new OpenScene(0 , 0 , Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);

@@ -4,14 +4,13 @@ import java.awt.*;
 public class OpenScene extends JPanel {
     private int x;
     private int y;
-
     private int width;
     private int height;
     private ImageIcon openPic;
 
     public OpenScene(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
-        this.openPic = new ImageIcon("frogger.png");
+        this.openPic = new ImageIcon("greenFrog.png");
 
     }
 
