@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameScene extends JPanel  {
+public class GameScene extends JPanel {
     private ArrayList<Definitions> obstacles;
     private Frog frog;
     private ImageIcon carLeft;
@@ -68,14 +68,13 @@ public class GameScene extends JPanel  {
                         xCarLeft -= Final.WINDOW_WIDTH + 300;
                     }
                     xTruckLeft += 2;
-                    xCarLeft += 2;
-                    xCarRight--;
+                    xCarLeft += 3;
+                    xCarRight -= 2;
                     xTruckRight -= 2;
                     xRose++;
                     if (xRose >= Final.WINDOW_WIDTH) {
                         xRose = 0;
                     }
-
 
                     repaint();
                     Thread.sleep(10);
@@ -85,7 +84,6 @@ public class GameScene extends JPanel  {
             }
         }).start();
     }
-
 
 
     protected void paintComponent(Graphics graphics) {
@@ -109,8 +107,6 @@ public class GameScene extends JPanel  {
 //        this.frogger.paintIcon(this, graphics, this.xFrogger  , this.yFrogger);
         //חייב למצוא פתרון יותר יפה לזה
     }
-
-
 
 
 }

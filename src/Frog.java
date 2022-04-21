@@ -5,10 +5,10 @@ import java.awt.event.KeyListener;
 
 public class Frog extends JPanel implements KeyListener {
 
-    private ImageIcon frog ;
-    private boolean alive ;
-    private Definitions image ;
-    private int xFrog ;
+    private ImageIcon frog;
+    private boolean alive;
+    private Definitions image;
+    private int xFrog;
     private int yFrog;
 
     public int getxFrog() {
@@ -27,36 +27,32 @@ public class Frog extends JPanel implements KeyListener {
         this.yFrog = yFrog;
     }
 
-    public Frog(){
+    public Frog() {
         this.alive = true;
         this.frog = new ImageIcon("FrogUp.png");
-        this.image = new Definitions(Final.WINDOW_WIDTH  / 2 , Final.WINDOW_HEIGHT - 10  , 40 , 40 );
-        this.yFrog  = Final.WINDOW_HEIGHT -75  ;
-        this.xFrog  = Final.WINDOW_WIDTH / 2 ;
+        this.image = new Definitions(Final.WINDOW_WIDTH / 2, Final.WINDOW_HEIGHT - 10, 40, 40);
+        this.yFrog = Final.WINDOW_HEIGHT - 75;
+        this.xFrog = Final.WINDOW_WIDTH / 2;
     }
 
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        this.frog.paintIcon(this , graphics , xFrog,yFrog );
+        this.frog.paintIcon(this, graphics, xFrog, yFrog);
     }
-    public void paint (Graphics graphics){
+
+    public void paint(Graphics graphics) {
         if (this.alive) {
             //   this.image.paintIcon;
         }
     }
 
 
-    public boolean checkCollision (Definitions obstacle){
+    public boolean checkCollision(Definitions obstacle) {
         boolean collision = false;
-
-        // this.anObstacle.();
-        // איך של התגנשות
-
-
-        return collision ;
+        return collision;
     }
 
-    public void Kill (){
+    public void Kill() {
         this.alive = false;
     }
 
@@ -73,7 +69,6 @@ public class Frog extends JPanel implements KeyListener {
             case KeyEvent.VK_LEFT:
                 moveLeft();
                 break;
-
             case KeyEvent.VK_UP:
                 moveUp();
                 break;
@@ -89,25 +84,30 @@ public class Frog extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-    public void moveUp (){
 
-        this.yFrog-= 2;
-        System.out.println("moveUp: frog move up"+ this.yFrog);
+    public void moveUp() {
+
+        this.yFrog -= 2;
+        System.out.println("moveUp: frog move up" + this.yFrog);
     }
-    public void moveDown (){
-        this.yFrog+= 2;
-        System.out.println("moveDown : frog moveDown "+ this.yFrog);
+
+    public void moveDown() {
+        this.yFrog += 2;
+        System.out.println("moveDown : frog moveDown " + this.yFrog);
     }
-    public void moveRight (){
-        this.xFrog+= 2;
-        System.out.println("moveUp: frog moveRight"+ this.xFrog);
+
+    public void moveRight() {
+        this.xFrog += 2;
+        System.out.println("moveUp: frog moveRight" + this.xFrog);
     }
-    public void moveLeft (){
-        this.xFrog-= 2;
-        System.out.println("moveUp: frog moveLeft"+ this.xFrog);
+
+    public void moveLeft() {
+        this.xFrog -= 2;
+        System.out.println("moveUp: frog moveLeft" + this.xFrog);
     }
-    public void jumpUp (){
-        yFrog-= 80;
-        System.out.println("moveUp: frog jumpUp"+ this.yFrog);
+
+    public void jumpUp() {
+        yFrog -= 80;
+        System.out.println("moveUp: frog jumpUp" + this.yFrog);
     }
-    }
+}
