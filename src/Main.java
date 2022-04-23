@@ -11,9 +11,10 @@ public class Main extends  JFrame {
     public Main(){
         OpenScene openScene = new OpenScene(0 , 0 , Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
         GameScene gameScene = new GameScene(0 , 0 , Final.WINDOW_WIDTH , Final.WINDOW_HEIGHT);
-        AnObstacle anObstacle = new AnObstacle();
+//        AnObstacle anObstacle = new AnObstacle();
         this.add(openScene);
-        this.add(anObstacle);
+        this.add(gameScene);
+//        this.add(anObstacle);
         this.setResizable(false);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

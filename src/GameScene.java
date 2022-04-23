@@ -13,18 +13,14 @@ public class GameScene extends JPanel {
     private ImageIcon frogger;
     private ImageIcon backGround;
 
-    private int xFrogger;
-    private int yFrogger;
     private int yTruckLeft;
     private int xTruckLeft;
-    //    private int yTruckLeft1;
-//    private int xTruckLeft1;
+
     private int yTruckRight;
     private int xTruckRight;
     private int xCarLeft;
     private int yCarLeft;
-    //    private int xCarLeft2;
-//    private int yCarLeft2;
+
     private int xCarRight;
     private int yCarRight;
     private int xRose;
@@ -41,9 +37,6 @@ public class GameScene extends JPanel {
         this.truckLeft = new ImageIcon("Truck-Left.png");
         this.truckRight = new ImageIcon("Truck-Right.png");
         this.rose = new ImageIcon("lilyPad.png");
-        this.frogger = new ImageIcon("FrogUp.png");
-        this.yFrogger = Final.WINDOW_HEIGHT - 75;
-        this.xFrogger = Final.WINDOW_WIDTH / 2;
         this.yTruckLeft = 500;
         this.yTruckRight = 440;
         this.yCarLeft = 320;
@@ -68,7 +61,7 @@ public class GameScene extends JPanel {
                         xCarLeft -= Final.WINDOW_WIDTH + 300;
                     }
                     xTruckLeft += 2;
-                    xCarLeft += 3;
+                    xCarLeft += 2;
                     xCarRight -= 2;
                     xTruckRight -= 2;
                     xRose++;
