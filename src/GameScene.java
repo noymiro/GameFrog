@@ -68,6 +68,9 @@ public class GameScene extends JPanel {
                     if (xTruckRight <= 0) {
                         xTruckRight += Final.WINDOW_WIDTH;
                     }
+                    if (xCarRight <= 0 ){
+                        xCarRight += Final.WINDOW_WIDTH;
+                    }
 
                 xTruckLeft += 2;
                 xCarLeft += 2;
@@ -96,17 +99,18 @@ public class GameScene extends JPanel {
         this.carLeft.paintIcon(this, graphics, this.xCarLeft - 150, this.yCarLeft);
         this.carLeft.paintIcon(this, graphics, this.xCarLeft - 300, this.yCarLeft);
         this.carRight.paintIcon(this, graphics, this.xCarRight, this.yCarRight);
+        this.carRight.paintIcon(this, graphics, this.xCarRight- 150, this.yCarRight);
+        this.carRight.paintIcon(this, graphics, this.xCarRight - 300, this.yCarRight);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft, this.yTruckLeft);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - 150, this.yTruckLeft);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - 300, this.yTruckLeft);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight, this.yTruckRight);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight + 150, this.yTruckRight);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight + 300, this.yTruckRight);
-        this.rose.paintIcon(this, graphics, this.xRose , this.yRose);
         this.rose.paintIcon(this, graphics, this.xRose + 50, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 225, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 375, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 525, this.yRose);
+        this.rose.paintIcon(this, graphics, this.xRose + 200, this.yRose);
+        this.rose.paintIcon(this, graphics, this.xRose + 350, this.yRose);
+        this.rose.paintIcon(this, graphics, this.xRose + 500, this.yRose);
         this.frog.paintComponent(graphics);
 //        this.frogger.paintIcon(this, graphics, this.xFrogger  , this.yFrogger);
         //חייב למצוא פתרון יותר יפה לזה
