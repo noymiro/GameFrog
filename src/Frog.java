@@ -6,7 +6,6 @@ import java.awt.event.KeyListener;
 public class Frog extends JPanel implements KeyListener {
 
     private ImageIcon frog;
-    private boolean alive;
     private Definitions image;
     private int xFrog;
     private int yFrog;
@@ -28,7 +27,6 @@ public class Frog extends JPanel implements KeyListener {
     }
 
     public Frog() {
-        this.alive = true;
         this.frog = new ImageIcon("FrogUp.png");
         this.image = new Definitions(Final.WINDOW_WIDTH / 2, Final.WINDOW_HEIGHT - 10, 40, 40);
         this.yFrog = Final.WINDOW_HEIGHT - 75;
@@ -40,21 +38,7 @@ public class Frog extends JPanel implements KeyListener {
         this.frog.paintIcon(this, graphics, xFrog, yFrog);
     }
 
-    public void paint(Graphics graphics) {
-        if (this.alive) {
-            //   this.image.paintIcon;
-        }
-    }
 
-
-    public boolean checkCollision(Definitions obstacle) {
-        boolean collision = false;
-        return collision;
-    }
-
-    public void Kill() {
-        this.alive = false;
-    }
 
     public void keyTyped(KeyEvent e) {
 

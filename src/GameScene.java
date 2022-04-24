@@ -10,7 +10,6 @@ public class GameScene extends JPanel {
     private ImageIcon truckLeft;
     private ImageIcon truckRight;
     private ImageIcon rose;
-    private ImageIcon frogger;
     private ImageIcon backGround;
 
     private int yTruckLeft;
@@ -30,6 +29,7 @@ public class GameScene extends JPanel {
         this.setBackground(Color.GREEN);
         this.setBounds(x, y, width, height);
         this.frog = new Frog();
+//        this.anObstacle = new AnObstacle();
         this.obstacles = new ArrayList<>();
         this.backGround = new ImageIcon("backGround.png");
         this.carLeft = new ImageIcon("Car1-Left.png");
@@ -44,34 +44,44 @@ public class GameScene extends JPanel {
         this.yRose = 110;
         this.xCarRight = Final.WINDOW_WIDTH;
         this.xTruckRight = Final.WINDOW_WIDTH;
-        this.mainGameLoop();
 
     }
 
-    private void mainGameLoop() {
+    public void mainGameLoop() {
         new Thread(() -> {
             this.setFocusable(true);
             this.requestFocus();
             this.addKeyListener(this.frog);
+            System.out.println("mainGameLoop: start");
             while (true) {
                 try {
-//                    dead();
-                    if (xTruckLeft >= Final.WINDOW_WIDTH + 300 || xCarLeft >= Final.WINDOW_WIDTH + 300) {
-                        xTruckLeft -= Final.WINDOW_WIDTH + 300;
-                        xCarLeft -= Final.WINDOW_WIDTH + 300;
-                    }
-                    xTruckLeft += 2;
-                    xCarLeft += 2;
-                    xCarRight -= 2;
-                    xTruckRight -= 2;
-                    xRose++;
-                    if (xRose >= Final.WINDOW_WIDTH) {
-                        xRose = 0;
+                    if (!collision(frog)) {
+                        frog.setyFrog(Final.WINDOW_HEIGHT - 75);
                     }
 
-                    repaint();
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
+                    if (xTruckLeft >= Final.WINDOW_WIDTH + 300) {
+                        xTruckLeft -= Final.WINDOW_WIDTH + 300;
+                    }
+                    if (xCarLeft >= Final.WINDOW_WIDTH + 300) {
+                        xCarLeft -= Final.WINDOW_WIDTH + 300;
+                    }
+                    if (xTruckRight <= 0) {
+                        xTruckRight += Final.WINDOW_WIDTH;
+                    }
+
+                xTruckLeft += 2;
+                xCarLeft += 2;
+                xCarRight -= 2;
+                xTruckRight -= 2;
+                xRose++;
+                if (xRose >= Final.WINDOW_WIDTH) {
+                    xRose = 0;
+                }
+
+
+                repaint();
+                Thread.sleep(10);
+             } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -92,6 +102,7 @@ public class GameScene extends JPanel {
         this.truckRight.paintIcon(this, graphics, this.xTruckRight, this.yTruckRight);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight + 150, this.yTruckRight);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight + 300, this.yTruckRight);
+        this.rose.paintIcon(this, graphics, this.xRose , this.yRose);
         this.rose.paintIcon(this, graphics, this.xRose + 50, this.yRose);
         this.rose.paintIcon(this, graphics, this.xRose + 225, this.yRose);
         this.rose.paintIcon(this, graphics, this.xRose + 375, this.yRose);
@@ -101,5 +112,40 @@ public class GameScene extends JPanel {
         //חייב למצוא פתרון יותר יפה לזה
     }
 
+    public boolean collision(Frog frog) {
+        boolean alive = true;
+        if (frog.getyFrog() <= 517 && frog.getyFrog() >= 477) {
+            if (frog.getxFrog() == xTruckLeft
+                    || frog.getxFrog() == xTruckLeft - 150
+                    || frog.getxFrog() == xTruckLeft - 300) {
+                alive = false;
+            }
+        }
+        if (frog.getyFrog() <= 465 && frog.getyFrog() >= 425) {
+            if (frog.getxFrog() == xTruckRight
+                    || frog.getxFrog() == xTruckRight + 150
+                    || frog.getxFrog() == xTruckRight + 300) {
+                alive = false;
+            }
+        }
+        if(frog.getyFrog() <= 182 && frog.getyFrog() >= 35){
+            if(frog.getyFrog() <= 113 && frog.getyFrog() >= 103 ) {
+                if (frog.getxFrog() >= xRose - 8 && frog.getxFrog() <= xRose + 12)//צריך למצוא פתרון לכל הפרחים תופס רק על הראשון
+                {
+                    alive = true;
+            }else {
+                    alive = false;
+                }
+
+            }else {
+                alive = false;
+            }
+        }
+        return alive;
+
+    }
 
 }
+
+
+
