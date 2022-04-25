@@ -14,10 +14,12 @@ public class OpenScene extends JPanel {
         this.openPic = new ImageIcon("greenFrog.png");
         this.gameScene = new GameScene(x,y,width,height);
 
+
     }
 
     protected void paintComponent(Graphics graphics) {
 //        GameScene gameScene = new GameScene(0, 0, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
+
         InformationScene informationScene = new InformationScene(0, 0, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
         super.paintComponent(graphics);
         //graphics.setColor(Color.BLUE);
@@ -37,9 +39,6 @@ public class OpenScene extends JPanel {
             this.remove(button2);
             this.add(gameScene);
             gameScene.mainGameLoop();
-
-
-
 
         });
         button2.addActionListener((event) -> {

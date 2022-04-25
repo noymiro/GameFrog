@@ -1,10 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameScene extends JPanel {
     private ArrayList<Definitions> obstacles;
     private Frog frog;
+//    private Timer timer;
     private ImageIcon carLeft;
     private ImageIcon carRight;
     private ImageIcon truckLeft;
@@ -29,7 +33,6 @@ public class GameScene extends JPanel {
         this.setBackground(Color.GREEN);
         this.setBounds(x, y, width, height);
         this.frog = new Frog();
-//        this.anObstacle = new AnObstacle();
         this.obstacles = new ArrayList<>();
         this.backGround = new ImageIcon("backGround.png");
         this.carLeft = new ImageIcon("Car1-Left.png");
@@ -44,17 +47,24 @@ public class GameScene extends JPanel {
         this.yRose = 110;
         this.xCarRight = Final.WINDOW_WIDTH;
         this.xTruckRight = Final.WINDOW_WIDTH;
+//        this.timer = new Timer();
+
+
+
 
     }
 
     public void mainGameLoop() {
+
         new Thread(() -> {
             this.setFocusable(true);
             this.requestFocus();
             this.addKeyListener(this.frog);
             System.out.println("mainGameLoop: start");
+//            countDown();
             while (true) {
                 try {
+
                     if (!collision(frog)) {
                         frog.setyFrog(Final.WINDOW_HEIGHT - 75);
                     }
@@ -65,22 +75,21 @@ public class GameScene extends JPanel {
                     if (xCarLeft >= Final.WINDOW_WIDTH + 300) {
                         xCarLeft -= Final.WINDOW_WIDTH + 300;
                     }
+                    if (xCarRight <= 0) {
+                        xCarRight += Final.WINDOW_WIDTH;//275-243
+                    }
                     if (xTruckRight <= 0) {
                         xTruckRight += Final.WINDOW_WIDTH;
-                    }
-                    if (xCarRight <= 0 ){
-                        xCarRight += Final.WINDOW_WIDTH;
                     }
 
                 xTruckLeft += 2;
                 xCarLeft += 2;
-                xCarRight -= 2;
+                xCarRight -= 3;
                 xTruckRight -= 2;
                 xRose++;
                 if (xRose >= Final.WINDOW_WIDTH) {
                     xRose = 0;
                 }
-
 
                 repaint();
                 Thread.sleep(10);
@@ -92,6 +101,7 @@ public class GameScene extends JPanel {
     }
 
 
+
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         this.backGround.paintIcon(this, graphics, 0, 0);
@@ -99,21 +109,24 @@ public class GameScene extends JPanel {
         this.carLeft.paintIcon(this, graphics, this.xCarLeft - 150, this.yCarLeft);
         this.carLeft.paintIcon(this, graphics, this.xCarLeft - 300, this.yCarLeft);
         this.carRight.paintIcon(this, graphics, this.xCarRight, this.yCarRight);
-        this.carRight.paintIcon(this, graphics, this.xCarRight- 150, this.yCarRight);
-        this.carRight.paintIcon(this, graphics, this.xCarRight - 300, this.yCarRight);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft, this.yTruckLeft);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - 150, this.yTruckLeft);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - 300, this.yTruckLeft);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight, this.yTruckRight);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight + 150, this.yTruckRight);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight + 300, this.yTruckRight);
+        this.rose.paintIcon(this, graphics, this.xRose , this.yRose);
         this.rose.paintIcon(this, graphics, this.xRose + 50, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 200, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 350, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 500, this.yRose);
+        this.rose.paintIcon(this, graphics, this.xRose + 225, this.yRose);
+        this.rose.paintIcon(this, graphics, this.xRose + 375, this.yRose);
+        this.rose.paintIcon(this, graphics, this.xRose + 525, this.yRose);
         this.frog.paintComponent(graphics);
-//        this.frogger.paintIcon(this, graphics, this.xFrogger  , this.yFrogger);
-        //חייב למצוא פתרון יותר יפה לזה
+        graphics.drawString( "60".trim(),15,15);
+
+
+
+
+
     }
 
     public boolean collision(Frog frog) {
@@ -134,6 +147,7 @@ public class GameScene extends JPanel {
         }
         if(frog.getyFrog() <= 182 && frog.getyFrog() >= 35){
             if(frog.getyFrog() <= 113 && frog.getyFrog() >= 103 ) {
+                System.out.println("rose x:" + xRose + " frog x:" + frog.getxFrog());
                 if (frog.getxFrog() >= xRose - 8 && frog.getxFrog() <= xRose + 12)//צריך למצוא פתרון לכל הפרחים תופס רק על הראשון
                 {
                     alive = true;
@@ -145,11 +159,44 @@ public class GameScene extends JPanel {
                 alive = false;
             }
         }
+        if (frog.getyFrog() <= 351 && frog.getyFrog() >= 291) {
+            if (frog.getxFrog() == xCarLeft
+                    || frog.getxFrog() == xCarLeft - 150
+                    || frog.getxFrog() == xCarLeft - 300) {
+                alive = false;
+            }
+        }
+        if (frog.getyFrog() <= 275 && frog.getyFrog() >= 243) {
+            if (frog.getxFrog() == xCarRight) {
+                alive = false;
+            }
+        }
         return alive;
 
     }
+//    public void countDown(){
+//        System.out.println("countDown start");
+//        JLabel jLabel = new JLabel();
+//        jLabel.setBounds(0, 0, Final.WINDOW_WIDTH/8, Final.WINDOW_HEIGHT/11);
+//        setBackground(Color.black);
+//        jLabel.setVisible(true);
+//
+//        TimerTask task = new TimerTask(){
+//            private int i = 4;
+//            public void run(){
+//                if (i >= 0) {
+//                    jLabel.setText("time left:" + i--);
+//                }
+//            }
+//        };
+//        this.add(jLabel);
+//        timer.scheduleAtFixedRate(task, 0, 1000);
+//    }
+
+
 
 }
+
 
 
 
