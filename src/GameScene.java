@@ -51,6 +51,7 @@ public class GameScene extends JPanel {
         this.yRose = 110;
         this.xCarRight = Final.WINDOW_WIDTH;
         this.xTruckRight = Final.WINDOW_WIDTH;
+        this.time = 600;
 //        this.timer = new Timer();
 
 
