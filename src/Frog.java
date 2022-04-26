@@ -48,7 +48,7 @@ public class Frog extends JPanel implements KeyListener {
         int keyCode = keyEvent.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_RIGHT:
-                moveRight();
+                this.moveRight();
                 break;
             case KeyEvent.VK_LEFT:
                 moveLeft();
@@ -70,24 +70,27 @@ public class Frog extends JPanel implements KeyListener {
     }
 
     public void moveUp() {
-
         this.yFrog -= 2;
-        System.out.println("moveUp: frog move up" + this.yFrog);
+        if (this.yFrog <  0)
+            yFrog=0;
     }
 
     public void moveDown() {
         this.yFrog += 2;
-        System.out.println("moveDown : frog moveDown " + this.yFrog);
+        if (this.yFrog >= Final.WINDOW_HEIGHT-75)
+            yFrog=Final.WINDOW_HEIGHT-75;
     }
 
     public void moveRight() {
         this.xFrog += 2;
-        System.out.println("moveUp: frog moveRight" + this.xFrog);
+        if (this.xFrog >= Final.WINDOW_WIDTH-50)
+            xFrog=Final.WINDOW_WIDTH-50;
     }
 
     public void moveLeft() {
         this.xFrog -= 2;
-        System.out.println("moveUp: frog moveLeft" + this.xFrog);
+        if (this.xFrog <= 0)
+            xFrog=0;
     }
 
     public void jumpUp() {
