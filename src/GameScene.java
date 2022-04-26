@@ -50,7 +50,7 @@ public class GameScene extends JPanel {
         this.yRose = 110;
         this.xCarRight = Final.WINDOW_WIDTH;
         this.xTruckRight = Final.WINDOW_WIDTH;
-        this.time = 6000;
+        this.time = 3000;
 
 
     }
@@ -85,7 +85,7 @@ public class GameScene extends JPanel {
                     xTruckRight -= 2;
                     xCarLeft += 2;
                     xCarRight -= 2;
-                    if(frog.getyFrog() <= 0){
+                    if(frog.getyFrog() <= 0 || time == 0 ) {
                         JLabel jLabel = new JLabel();
                         jLabel.setBounds(Final.WINDOW_WIDTH/2,Final.WINDOW_HEIGHT/2,250,160);
                         jLabel.setText("END GAME");
