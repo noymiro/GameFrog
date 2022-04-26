@@ -77,22 +77,27 @@ public class Frog extends JPanel implements KeyListener {
     public void moveDown() {
         this.yFrog += 2;
         System.out.println("moveDown: " +yFrog);
-        if (this.yFrog >= Final.WINDOW_HEIGHT-75)
+        if (this.yFrog >= Final.WINDOW_HEIGHT-75){
             yFrog-=2;
+        }
+
+        System.out.println("Lower border");
     }
 
     public void moveRight() {
         this.xFrog += 2;
         System.out.println("moveRight: " + xFrog);
-        if (this.xFrog >= Final.WINDOW_WIDTH-50)
-            xFrog-=2;
+        if (this.xFrog >= Final.WINDOW_WIDTH-50) {
+            xFrog -= 2;
+        }
     }
 
     public void moveLeft() {
         this.xFrog -= 2;
         System.out.println("moveLeft: " + xFrog);
-        if (this.xFrog <= 0)
-            xFrog+=2;
+        if (this.xFrog <= 0) {
+            xFrog += 2;
+        }
     }
 
     public void jumpUp() {
