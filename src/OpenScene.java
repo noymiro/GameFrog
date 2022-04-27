@@ -11,8 +11,8 @@ public class OpenScene extends JPanel {
 
     public OpenScene(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
-        this.openPic = new ImageIcon("greenFrog.png");
-        this.gameScene = new GameScene(x,y,width,height);
+        this.openPic = new ImageIcon("GreenFrog.png");
+        this.gameScene = new GameScene(x, y, width, height);
 
 
     }
@@ -27,7 +27,7 @@ public class OpenScene extends JPanel {
         button.setOpaque(true);
         button.setBackground(Color.green);
         JButton button2 = new JButton("Information");
-        button2.setBounds(Final.X_BUTTON,  Final.Y_BUTTON2 , Final.BUTTON_WIDTH, Final.BUTTON_HEIGHT);
+        button2.setBounds(Final.X_BUTTON, Final.Y_BUTTON2, Final.BUTTON_WIDTH, Final.BUTTON_HEIGHT);
         this.add(button2);
         button2.setOpaque(true);
         button2.setBackground(Color.ORANGE);

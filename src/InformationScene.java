@@ -14,7 +14,6 @@ public class InformationScene extends JPanel {
         this.setBackground(Color.GREEN);
         this.setVisible(true);
         repaint();
-
     }
 
     protected void paintComponent(Graphics graphics) {

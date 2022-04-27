@@ -1,9 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameScene extends JPanel {
 
@@ -34,13 +30,13 @@ public class GameScene extends JPanel {
         this.setBackground(Color.GREEN);
         this.setBounds(x, y, width, height);
         this.frog = new Frog();
-        this.backGround = new ImageIcon("backGround.png");
+        this.backGround = new ImageIcon("BackGround.png");
         this.carLeft = new ImageIcon("Car1-Left.png");
         this.carRight = new ImageIcon("Car1-Right.png");
         this.truckLeft = new ImageIcon("Truck-Left.png");
         this.truckRight = new ImageIcon("Truck-Right.png");
         this.rose = new ImageIcon("lilyPad.png");
-        this.snake = new ImageIcon("snake.png");
+        this.snake = new ImageIcon("Snake.png");
         this.ySnake = Final.Y_SNAKE;
         this.yTruckLeft = Final.Y_TRUCK_LEFT;
         this.yTruckRight = Final.Y_TRUCK_RIGHT;
@@ -65,7 +61,7 @@ public class GameScene extends JPanel {
                 try {
 
                     if (!collision(frog)) {
-                        frog.setyFrog(Final.WINDOW_HEIGHT - 75);
+                        frog.setyFrog(Final.WINDOW_HEIGHT - Final.NEW_POSITION_FROG);
                     }
 
                     if (xTruckLeft >= Final.WINDOW_WIDTH + Final.OBJECT_POSITION) {
@@ -74,27 +70,26 @@ public class GameScene extends JPanel {
                     if (xCarLeft >= Final.WINDOW_WIDTH + Final.OBJECT_POSITION) {
                         xCarLeft -= Final.WINDOW_WIDTH + Final.OBJECT_POSITION;
                     }
-                    if (xCarRight <= -300) {
-                        xCarRight += Final.WINDOW_WIDTH + Final.OBJECT_POSITION;//275-243
+                    if (xCarRight <= -Final.OBJECT_POSITION) {
+                        xCarRight += Final.WINDOW_WIDTH + Final.OBJECT_POSITION;
                     }
                     if (xTruckRight <= 0) {
                         xTruckRight += Final.WINDOW_WIDTH + Final.OBJECT_POSITION;
                     }
-                    xTruckLeft += 2;
-                    xTruckRight -= 2;
-                    xCarLeft += 2;
-                    xCarRight -= 2;
-                    if(frog.getyFrog() <= 0 ) {
-                     //   frog.setyFrog(Final.WINDOW_HEIGHT);
-                        YouWin youWin = new YouWin(0, 0, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
+                    xTruckLeft += Final.STEPS;
+                    xTruckRight -= Final.STEPS;
+                    xCarLeft += Final.STEPS;
+                    xCarRight -= Final.STEPS;
+                    if (frog.getyFrog() <= 0) {
+                        YouWin youWin = new YouWin(Final.X_PIC, Final.Y_PIC, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
                         this.add(youWin);
                     }
-                        if (time == 0 ) {
-                            GameOver gameOver = new GameOver(0 , 0 , Final.WINDOW_WIDTH , Final.WINDOW_HEIGHT);
-                            this.add(gameOver);
+                    if (time == 0) {
+                        GameOver gameOver = new GameOver(Final.X_PIC, Final.Y_PIC, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
+                        this.add(gameOver);
                     }
                     repaint();
-                    Thread.sleep(10);
+                    Thread.sleep(Final.MILLIS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -102,85 +97,82 @@ public class GameScene extends JPanel {
         }).start();
 
 
-        }
-
+    }
 
 
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        this.backGround.paintIcon(this, graphics, 0, 0);
+        this.backGround.paintIcon(this, graphics, Final.X_PIC, Final.Y_PIC);
         this.carLeft.paintIcon(this, graphics, this.xCarLeft, this.yCarLeft);
-        this.carLeft.paintIcon(this, graphics, this.xCarLeft - 150, this.yCarLeft);
+        this.carLeft.paintIcon(this, graphics, this.xCarLeft - Final.OBJECT_POSITION_NEW, this.yCarLeft);
         this.carLeft.paintIcon(this, graphics, this.xCarLeft - Final.OBJECT_POSITION, this.yCarLeft);
         this.carRight.paintIcon(this, graphics, this.xCarRight, this.yCarRight);
-        this.carRight.paintIcon(this, graphics, this.xCarRight + 150, this.yCarRight);
+        this.carRight.paintIcon(this, graphics, this.xCarRight + Final.OBJECT_POSITION_NEW, this.yCarRight);
         this.carRight.paintIcon(this, graphics, this.xCarRight + Final.OBJECT_POSITION, this.yCarRight);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft, this.yTruckLeft);
-        this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - 150, this.yTruckLeft);
+        this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - Final.OBJECT_POSITION_NEW, this.yTruckLeft);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - Final.OBJECT_POSITION, this.yTruckLeft);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight, this.yTruckRight);
-        this.truckRight.paintIcon(this, graphics, this.xTruckRight + 150, this.yTruckRight);
+        this.truckRight.paintIcon(this, graphics, this.xTruckRight + Final.OBJECT_POSITION_NEW, this.yTruckRight);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight + Final.OBJECT_POSITION, this.yTruckRight);
         this.rose.paintIcon(this, graphics, this.xRose, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 220, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 520, this.yRose);
-        this.rose.paintIcon(this, graphics, this.xRose + 750, this.yRose);
-        this.snake.paintIcon(this, graphics, this.xSnake + 630, this.ySnake);
-        this.snake.paintIcon(this, graphics, this.xSnake + 350, this.ySnake);
-        this.snake.paintIcon(this, graphics, this.xSnake + 100, this.ySnake);
+        this.rose.paintIcon(this, graphics, this.xRose + Final.ROSE1, this.yRose);
+        this.rose.paintIcon(this, graphics, this.xRose + Final.ROSE2, this.yRose);
+        this.rose.paintIcon(this, graphics, this.xRose + Final.ROSE3, this.yRose);
+        this.snake.paintIcon(this, graphics, this.xSnake + Final.SNAKE1, this.ySnake);
+        this.snake.paintIcon(this, graphics, this.xSnake + Final.SNAKE2, this.ySnake);
+        this.snake.paintIcon(this, graphics, this.xSnake + Final.SNAKE3, this.ySnake);
         this.frog.paintComponent(graphics);
         time--;
         String timer = String.valueOf(time);
         String timeSec = "Frog time left :";
-        getGraphics().drawString(timeSec + timer, 15, 15);
-
-
+        getGraphics().drawString(timeSec + timer, Final.X_TIME, Final.Y_TIME);
     }
 
     public boolean collision(Frog frog) {
         boolean alive = true;
-        if (frog.getyFrog() <= 517 && frog.getyFrog() >= 477) {
+        if (frog.getyFrog() <= Final.START_ROAD1 && frog.getyFrog() >= Final.END_ROAD1) { // ROAD 1
             if (frog.getxFrog() == xTruckLeft
-                    || frog.getxFrog() == xTruckLeft - 150
+                    || frog.getxFrog() == xTruckLeft - Final.OBJECT_POSITION_NEW
                     || frog.getxFrog() == xTruckLeft - Final.OBJECT_POSITION) {
                 alive = false;
             }
         }
-        if (frog.getyFrog() <= 465 && frog.getyFrog() >= 425) {
+        if (frog.getyFrog() <= Final.START_ROAD2 && frog.getyFrog() >= Final.END_ROAD2) { // ROAD 2
             if (frog.getxFrog() == xTruckRight
-                    || frog.getxFrog() == xTruckRight + 150
+                    || frog.getxFrog() == xTruckRight + Final.OBJECT_POSITION_NEW
                     || frog.getxFrog() == xTruckRight + Final.OBJECT_POSITION) {
                 alive = false;
             }
         }
-        if (frog.getyFrog() <= 182 && frog.getyFrog() >= 35) {
-            if (frog.getyFrog() <= 113 && frog.getyFrog() >= 103) {
+        if (frog.getyFrog() <= Final.START_RIVER && frog.getyFrog() >= Final.END_RIVER) { //RIVER
+            if (frog.getyFrog() <= Final.START_ROSE && frog.getyFrog() >= Final.END_ROSE) { // ROSE
                 System.out.println("rose x:" + xRose + " frog x:" + frog.getxFrog());
-                if ((frog.getxFrog() >= xRose - 5 && frog.getxFrog() <= xRose + 5)
+                if ((frog.getxFrog() >= xRose - Final.START_AND_END_ROSE1 && frog.getxFrog() <= xRose + Final.START_AND_END_ROSE1)
                         ||
-                        (frog.getxFrog() >= xRose + 215 && frog.getxFrog() <= xRose + 225)
+                        (frog.getxFrog() >= xRose + Final.START_ROSE2 && frog.getxFrog() <= xRose + Final.END_ROSE2)
                         ||
-                        (frog.getxFrog() >= xRose + 515 && frog.getxFrog() <= xRose + 525)
+                        (frog.getxFrog() >= xRose + Final.START_ROSE3 && frog.getxFrog() <= xRose + Final.END_ROSE3)
                         ||
-                        (frog.getxFrog() >= xRose + 745 && frog.getxFrog() <= xRose + 755)) {
+                        (frog.getxFrog() >= xRose + Final.START_ROSE4 && frog.getxFrog() <= xRose + Final.END_ROSE4)) {
                     alive = true;
                 } else {
                     alive = false;
                 }
-            }else {
+            } else {
                 alive = false;
             }
         }
-        if (frog.getyFrog() <= 351 && frog.getyFrog() >= 291) {
+        if (frog.getyFrog() <= Final.START_ROAD3 && frog.getyFrog() >= Final.END_ROAD3) { // ROAD 3
             if (frog.getxFrog() == xCarLeft
-                    || frog.getxFrog() == xCarLeft - 150
+                    || frog.getxFrog() == xCarLeft - Final.OBJECT_POSITION_NEW
                     || frog.getxFrog() == xCarLeft - Final.OBJECT_POSITION) {
                 alive = false;
             }
         }
-        if (frog.getyFrog() <= 283 && frog.getyFrog() >= 241) {
+        if (frog.getyFrog() <= Final.START_ROAD4 && frog.getyFrog() >= Final.END_ROAD4) { // ROAD 4
             if (frog.getxFrog() == xCarRight
-                    || frog.getxFrog() == xCarRight + 150
+                    || frog.getxFrog() == xCarRight + Final.OBJECT_POSITION_NEW
                     || frog.getxFrog() == xCarRight + Final.OBJECT_POSITION) {
                 alive = false;
             }
