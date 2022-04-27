@@ -6,7 +6,6 @@ import java.awt.event.KeyListener;
 public class Frog extends JPanel implements KeyListener {
 
     private ImageIcon frog;
-    private Definitions image;
     private int xFrog;
     private int yFrog;
 
@@ -28,7 +27,6 @@ public class Frog extends JPanel implements KeyListener {
 
     public Frog() {
         this.frog = new ImageIcon("FrogUp.png");
-        this.image = new Definitions(Final.WINDOW_WIDTH / 2, Final.WINDOW_HEIGHT - 10, 40, 40);
         this.yFrog = Final.WINDOW_HEIGHT - 75;
         this.xFrog = Final.WINDOW_WIDTH / 2;
     }
@@ -37,7 +35,6 @@ public class Frog extends JPanel implements KeyListener {
         super.paintComponent(graphics);
         this.frog.paintIcon(this, graphics, xFrog, yFrog);
     }
-
 
 
     public void keyTyped(KeyEvent e) {
@@ -76,9 +73,9 @@ public class Frog extends JPanel implements KeyListener {
 
     public void moveDown() {
         this.yFrog += 2;
-        System.out.println("moveDown: " +yFrog);
-        if (this.yFrog >= Final.WINDOW_HEIGHT-75){
-            yFrog-=2;
+        System.out.println("moveDown: " + yFrog);
+        if (this.yFrog >= Final.WINDOW_HEIGHT - 75) {
+            yFrog -= 2;
         }
 
         System.out.println("Lower border");
@@ -87,7 +84,7 @@ public class Frog extends JPanel implements KeyListener {
     public void moveRight() {
         this.xFrog += 2;
         System.out.println("moveRight: " + xFrog);
-        if (this.xFrog >= Final.WINDOW_WIDTH-50) {
+        if (this.xFrog >= Final.WINDOW_WIDTH - 50) {
             xFrog -= 2;
         }
     }
@@ -101,7 +98,7 @@ public class Frog extends JPanel implements KeyListener {
     }
 
     public void jumpUp() {
-        yFrog -= 80;
+        yFrog -= Final.JUMP_UP;
         System.out.println("moveUp: frog jumpUp" + this.yFrog);
     }
 }

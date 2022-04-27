@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameScene extends JPanel {
-    private ArrayList<Definitions> obstacles;
+
     private Frog frog;
     private ImageIcon carLeft;
     private ImageIcon carRight;
@@ -34,7 +34,6 @@ public class GameScene extends JPanel {
         this.setBackground(Color.GREEN);
         this.setBounds(x, y, width, height);
         this.frog = new Frog();
-        this.obstacles = new ArrayList<>();
         this.backGround = new ImageIcon("backGround.png");
         this.carLeft = new ImageIcon("Car1-Left.png");
         this.carRight = new ImageIcon("Car1-Right.png");
@@ -42,15 +41,15 @@ public class GameScene extends JPanel {
         this.truckRight = new ImageIcon("Truck-Right.png");
         this.rose = new ImageIcon("lilyPad.png");
         this.snake = new ImageIcon("snake.png");
-        this.ySnake = 110;
-        this.yTruckLeft = 500;
-        this.yTruckRight = 440;
-        this.yCarLeft = 320;
-        this.yCarRight = 260;
-        this.yRose = 110;
+        this.ySnake = Final.Y_SNAKE;
+        this.yTruckLeft = Final.Y_TRUCK_LEFT;
+        this.yTruckRight = Final.Y_TRUCK_RIGHT;
+        this.yCarLeft = Final.Y_CAR_LEFT;
+        this.yCarRight = Final.Y_CAR_RIGHT;
+        this.yRose = Final.Y_ROSE;
         this.xCarRight = Final.WINDOW_WIDTH;
         this.xTruckRight = Final.WINDOW_WIDTH;
-        this.time = 3000;
+        this.time = Final.TIMER;
 
 
     }
@@ -69,31 +68,31 @@ public class GameScene extends JPanel {
                         frog.setyFrog(Final.WINDOW_HEIGHT - 75);
                     }
 
-                    if (xTruckLeft >= Final.WINDOW_WIDTH + 300) {
-                        xTruckLeft -= Final.WINDOW_WIDTH + 300;
+                    if (xTruckLeft >= Final.WINDOW_WIDTH + Final.OBJECT_POSITION) {
+                        xTruckLeft -= Final.WINDOW_WIDTH + Final.OBJECT_POSITION;
                     }
-                    if (xCarLeft >= Final.WINDOW_WIDTH + 300) {
-                        xCarLeft -= Final.WINDOW_WIDTH + 300;
+                    if (xCarLeft >= Final.WINDOW_WIDTH + Final.OBJECT_POSITION) {
+                        xCarLeft -= Final.WINDOW_WIDTH + Final.OBJECT_POSITION;
                     }
                     if (xCarRight <= -300) {
-                        xCarRight += Final.WINDOW_WIDTH + 300;//275-243
+                        xCarRight += Final.WINDOW_WIDTH + Final.OBJECT_POSITION;//275-243
                     }
                     if (xTruckRight <= 0) {
-                        xTruckRight += Final.WINDOW_WIDTH + 300;
+                        xTruckRight += Final.WINDOW_WIDTH + Final.OBJECT_POSITION;
                     }
                     xTruckLeft += 2;
                     xTruckRight -= 2;
                     xCarLeft += 2;
                     xCarRight -= 2;
-                    if(frog.getyFrog() <= 0 || time == 0 ) {
-                        JLabel jLabel = new JLabel();
-                        jLabel.setBounds(Final.WINDOW_WIDTH/2,Final.WINDOW_HEIGHT/2,250,160);
-                        jLabel.setText("END GAME");
-                        this.add(jLabel);
-                        frog.setyFrog(Final.WINDOW_HEIGHT - 75);
-
+                    if(frog.getyFrog() <= 0 ) {
+                     //   frog.setyFrog(Final.WINDOW_HEIGHT);
+                        YouWin youWin = new YouWin(0, 0, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
+                        this.add(youWin);
                     }
-
+                        if (time == 0 ) {
+                            GameOver gameOver = new GameOver(0 , 0 , Final.WINDOW_WIDTH , Final.WINDOW_HEIGHT);
+                            this.add(gameOver);
+                    }
                     repaint();
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
@@ -112,16 +111,16 @@ public class GameScene extends JPanel {
         this.backGround.paintIcon(this, graphics, 0, 0);
         this.carLeft.paintIcon(this, graphics, this.xCarLeft, this.yCarLeft);
         this.carLeft.paintIcon(this, graphics, this.xCarLeft - 150, this.yCarLeft);
-        this.carLeft.paintIcon(this, graphics, this.xCarLeft - 300, this.yCarLeft);
+        this.carLeft.paintIcon(this, graphics, this.xCarLeft - Final.OBJECT_POSITION, this.yCarLeft);
         this.carRight.paintIcon(this, graphics, this.xCarRight, this.yCarRight);
         this.carRight.paintIcon(this, graphics, this.xCarRight + 150, this.yCarRight);
-        this.carRight.paintIcon(this, graphics, this.xCarRight + 300, this.yCarRight);
+        this.carRight.paintIcon(this, graphics, this.xCarRight + Final.OBJECT_POSITION, this.yCarRight);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft, this.yTruckLeft);
         this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - 150, this.yTruckLeft);
-        this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - 300, this.yTruckLeft);
+        this.truckLeft.paintIcon(this, graphics, this.xTruckLeft - Final.OBJECT_POSITION, this.yTruckLeft);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight, this.yTruckRight);
         this.truckRight.paintIcon(this, graphics, this.xTruckRight + 150, this.yTruckRight);
-        this.truckRight.paintIcon(this, graphics, this.xTruckRight + 300, this.yTruckRight);
+        this.truckRight.paintIcon(this, graphics, this.xTruckRight + Final.OBJECT_POSITION, this.yTruckRight);
         this.rose.paintIcon(this, graphics, this.xRose, this.yRose);
         this.rose.paintIcon(this, graphics, this.xRose + 220, this.yRose);
         this.rose.paintIcon(this, graphics, this.xRose + 520, this.yRose);
@@ -132,7 +131,7 @@ public class GameScene extends JPanel {
         this.frog.paintComponent(graphics);
         time--;
         String timer = String.valueOf(time);
-        String timeSec = "Time of the game :";
+        String timeSec = "Frog time left :";
         getGraphics().drawString(timeSec + timer, 15, 15);
 
 
@@ -143,14 +142,14 @@ public class GameScene extends JPanel {
         if (frog.getyFrog() <= 517 && frog.getyFrog() >= 477) {
             if (frog.getxFrog() == xTruckLeft
                     || frog.getxFrog() == xTruckLeft - 150
-                    || frog.getxFrog() == xTruckLeft - 300) {
+                    || frog.getxFrog() == xTruckLeft - Final.OBJECT_POSITION) {
                 alive = false;
             }
         }
         if (frog.getyFrog() <= 465 && frog.getyFrog() >= 425) {
             if (frog.getxFrog() == xTruckRight
                     || frog.getxFrog() == xTruckRight + 150
-                    || frog.getxFrog() == xTruckRight + 300) {
+                    || frog.getxFrog() == xTruckRight + Final.OBJECT_POSITION) {
                 alive = false;
             }
         }
@@ -168,19 +167,21 @@ public class GameScene extends JPanel {
                 } else {
                     alive = false;
                 }
+            }else {
+                alive = false;
             }
         }
         if (frog.getyFrog() <= 351 && frog.getyFrog() >= 291) {
             if (frog.getxFrog() == xCarLeft
                     || frog.getxFrog() == xCarLeft - 150
-                    || frog.getxFrog() == xCarLeft - 300) {
+                    || frog.getxFrog() == xCarLeft - Final.OBJECT_POSITION) {
                 alive = false;
             }
         }
         if (frog.getyFrog() <= 283 && frog.getyFrog() >= 241) {
             if (frog.getxFrog() == xCarRight
                     || frog.getxFrog() == xCarRight + 150
-                    || frog.getxFrog() == xCarRight + 300) {
+                    || frog.getxFrog() == xCarRight + Final.OBJECT_POSITION) {
                 alive = false;
             }
         }

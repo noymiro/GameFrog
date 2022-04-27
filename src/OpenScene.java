@@ -18,19 +18,16 @@ public class OpenScene extends JPanel {
     }
 
     protected void paintComponent(Graphics graphics) {
-//        GameScene gameScene = new GameScene(0, 0, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
-
-        InformationScene informationScene = new InformationScene(0, 0, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
+        InformationScene informationScene = new InformationScene(Final.X_PIC, Final.Y_PIC, Final.WINDOW_WIDTH, Final.WINDOW_HEIGHT);
         super.paintComponent(graphics);
-        //graphics.setColor(Color.BLUE);
-        this.openPic.paintIcon(this, graphics, 0, 0);
+        this.openPic.paintIcon(this, graphics, Final.X_PIC, Final.Y_PIC);
         JButton button = new JButton("Start Game");
-        button.setBounds(0, 200, 200, 50);
+        button.setBounds(Final.X_BUTTON, Final.Y_BUTTON1, Final.BUTTON_WIDTH, Final.BUTTON_HEIGHT);
         this.add(button);
         button.setOpaque(true);
         button.setBackground(Color.green);
         JButton button2 = new JButton("Information");
-        button2.setBounds(0, 250, 200, 50);
+        button2.setBounds(Final.X_BUTTON,  Final.Y_BUTTON2 , Final.BUTTON_WIDTH, Final.BUTTON_HEIGHT);
         this.add(button2);
         button2.setOpaque(true);
         button2.setBackground(Color.ORANGE);
@@ -41,6 +38,7 @@ public class OpenScene extends JPanel {
             gameScene.mainGameLoop();
 
         });
+
         button2.addActionListener((event) -> {
             this.add(informationScene);
             repaint();

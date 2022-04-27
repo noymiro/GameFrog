@@ -1,26 +1,26 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class InformationScene extends JPanel {
+public class GameOver extends JPanel{
     private int x;
     private int y;
     private int width;
     private int height;
-    private ImageIcon Information;
+    private ImageIcon gameOver;
 
-    public InformationScene(int x, int y, int width, int height) {
+    public GameOver(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
-        this.Information = new ImageIcon("Information.png");
-        this.setBackground(Color.GREEN);
+        this.gameOver = new ImageIcon("GameOver.png");
+
         this.setVisible(true);
         repaint();
-
     }
 
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        this.Information.paintIcon(this, graphics, Final.X_PIC, Final.Y_PIC);
-
+        this.gameOver.paintIcon(this, graphics, Final.X_PIC, Final.Y_PIC);
     }
-
 }
+
+
+
